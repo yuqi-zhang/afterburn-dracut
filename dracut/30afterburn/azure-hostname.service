@@ -10,7 +10,6 @@ Before=ignition-setup.service
 [Service]
 ExecStart=/usr/bin/afterburn --cmdline --hostname /etc/hostname
 Type=oneshot
-RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
