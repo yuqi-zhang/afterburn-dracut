@@ -1,0 +1,16 @@
+# Azure needs to fetch hostname from metadata
+# during the initramfs
+
+[Unit]
+Description=Afterburn hostname
+ConditionKernelCommandLine=|ignition.platform.id=azure
+ConditionFirstBoot=yes
+Before=ignition-setup.service
+
+[Service]
+ExecStart=/usr/bin/afterburn --cmdline --hostname /etc/hostname
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
