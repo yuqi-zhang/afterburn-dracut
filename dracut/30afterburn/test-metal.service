@@ -1,0 +1,12 @@
+[Unit]
+Description=Afterburn hostname test
+ConditionKernelCommandLine=|ignition.platform.id=metal
+After=ignition-disks.service
+Before=ignition-files.service
+
+OnFailure=emergency.target
+OnFailureJobMode=isolate
+
+[Service]
+ExecStart=sed -i "s/localhost.localdomain/testhost/g"  /sysroot/etc/hostname
+Type=oneshot

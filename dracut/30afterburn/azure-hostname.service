@@ -4,12 +4,12 @@
 [Unit]
 Description=Afterburn hostname
 ConditionKernelCommandLine=|ignition.platform.id=azure
-ConditionFirstBoot=yes
-Before=ignition-setup.service
+After=ignition-disks.service
+Before=ignition-files.service
+
+OnFailure=emergency.target
+OnFailureJobMode=isolate
 
 [Service]
-ExecStart=/usr/bin/afterburn --cmdline --hostname /etc/hostname
+ExecStart=/usr/bin/afterburn --cmdline --hostname=/sysroot/etc/hostname
 Type=oneshot
-
-[Install]
-WantedBy=multi-user.target
